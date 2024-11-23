@@ -1,4 +1,5 @@
 # Fast MNIST CNN Implementation
+![CI](https://github.com/MohammedYaseen97/erav3-assgn05/actions/workflows/model_tests.yml/badge.svg)
 
 A lightweight and efficient Convolutional Neural Network (CNN) implementation for the MNIST digit classification task, optimized for both performance and model size.
 

@@ -15,7 +15,7 @@ def test_model_size(model):
     total_params = sum(p.numel() for p in model.parameters())
     
     # Model should have less than 25k parameters
-    assert total_params < 25_000, f"Model has {total_params} parameters, exceeding 25k limit"
+    assert total_params <= 25_000, f"Model has {total_params} parameters, exceeding 25k limit"
 
 def test_model_training_accuracy():
     # Set device

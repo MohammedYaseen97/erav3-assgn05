@@ -26,7 +26,9 @@ class FastMNISTCNN(nn.Module):
         # Dense layers
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(16 * 12 * 12, 10)
+            nn.Linear(16 * 12 * 12, 120),
+            nn.ReLU(),
+            nn.Linear(120, 10)
         )
         
     def forward(self, x):
