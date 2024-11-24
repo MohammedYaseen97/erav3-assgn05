@@ -4,6 +4,9 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import numpy as np
+import torchvision
 
 class FastMNISTCNN(nn.Module):
     def __init__(self):
@@ -77,11 +80,15 @@ def evaluate(model, test_loader, device):
 def main():
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
     
     # Data loading
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
+        transforms.Normalize((0.1307,), (0.3081,)),
+        transforms.RandomRotation(10),  # Rotate by up to 10 degrees
+        transforms.RandomAffine(degrees=0, translate=(0.05, 0.05)),  # Translate by up to 5% in each direction
+        transforms.RandomPerspective(distortion_scale=0.5, p=0.5),  # Apply perspective transform
     ])
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
@@ -89,6 +96,15 @@ def main():
     
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=32)
+
+    # # Get a batch of images
+    # sample_images, _ = next(iter(train_loader))
+    # sample_images = sample_images[:8]
+    # grid = torchvision.utils.make_grid(sample_images, nrow=4)
+    # plt.figure(figsize=(10, 5))
+    # plt.imshow(np.transpose(grid, (1, 2, 0)))
+    # plt.axis('off')
+    # plt.show()
     
     # Model setup
     model = FastMNISTCNN().to(device)
