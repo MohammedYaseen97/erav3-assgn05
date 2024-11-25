@@ -25,7 +25,10 @@ def test_model_training_accuracy():
     # Data loading
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
+        transforms.Normalize((0.1307,), (0.3081,)),
+        transforms.RandomRotation(10),  # Rotate by up to 10 degrees
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # Translate by up to 10% in each direction
+        transforms.RandomPerspective(distortion_scale=0.5, p=0.5),  # Apply perspective transform
     ])
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
@@ -63,7 +66,10 @@ def test_gradient_check():
     # Data loading
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
+        transforms.Normalize((0.1307,), (0.3081,)),
+        transforms.RandomRotation(10),  # Rotate by up to 10 degrees
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # Translate by up to 10% in each direction
+        transforms.RandomPerspective(distortion_scale=0.5, p=0.5),  # Apply perspective transform
     ])
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
@@ -115,7 +121,10 @@ def test_inference_time():
     # Data loading
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
+        transforms.Normalize((0.1307,), (0.3081,)),
+        transforms.RandomRotation(10),  # Rotate by up to 10 degrees
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # Translate by up to 10% in each direction
+        transforms.RandomPerspective(distortion_scale=0.5, p=0.5),  # Apply perspective transform
     ])
     
     test_dataset = datasets.MNIST('./data', train=False, transform=transform)
