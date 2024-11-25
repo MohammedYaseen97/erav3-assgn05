@@ -35,10 +35,10 @@ Test suite includes:
 
 ## 🏗️ Project Structure
 
-.
-├── mnist_cnn.py # CNN model implementation
-├── test_mnist_model.py # Test suite
-├── requirements.txt # Project dependencies
+. \
+├── mnist_cnn.py # CNN model implementation \
+├── test_mnist_model.py # Test suite \
+├── requirements.txt # Project dependencies \
 └── .github/workflows # CI/CD configuration
 
 ## 🔍 Model Architecture
